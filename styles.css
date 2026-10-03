@@ -112,20 +112,11 @@ nav {
   position: relative;
 }
 
-.btn-nav .nav-icon {
-  font-size: 1.1rem;
-  transition: transform 0.3s ease;
-}
-
 .btn-nav:hover {
   background-color: rgba(59, 130, 246, 0.12);
   color: #ffffff;
   border-color: rgba(59, 130, 246, 0.3);
   transform: translateX(6px); /* TRANSFORMACIÓN AL HOVER */
-}
-
-.btn-nav:hover .nav-icon {
-  transform: scale(1.15) rotate(5deg); /* TRANSFORMACIÓN AL ICONO */
 }
 
 .btn-nav.active {
