@@ -1,51 +1,59 @@
 # 📊 Sistema de Control de Proyectos (SPA)
 
-Un sistema de gestión y control de proyectos desarrollado con arquitectura **Single Page Application (SPA)** nativa (sin frameworks ni librerías externas). Permite administrar presupuestos, personal, insumos y asignación de tareas, además de visualizar métricas en tiempo real a través de un Dashboard analítico.
+Aplicación web desarrollada como arquitectura **Single Page Application (SPA)** nativa en un único archivo ejecutable (`index.html`), orientada a la gestión de recursos, presupuestos y control de avance de proyectos sin dependencias externas ni backend.
 
 ---
 
-## 📈 Estado del Proyecto y Avance
+## 📈 Estado Actual del Código
 
-| Lenguaje / Módulo | Estado de Desarrollo | Porcentaje | Notas |
+| Lenguaje / Componente | Estado de Desarrollo | Porcentaje | Detalle del Avance |
 | :--- | :---: | :---: | :--- |
-| **HTML5** | 🟢 Completado | **100%** | Estructura semántica, formulación de entidades y tablas terminadas. |
-| **CSS3** | 🟡 En proceso | **30%** | Reglas básicas de visualización y alternancia de vistas configuradas. Pendiente aplicar estilos del Dashboard, *transitions* y *transformations*. |
-| **JavaScript (ES6+)** | 🟡 En proceso | **60%** | Lógica de navegación SPA, formularios de Personal/Materiales y manipulación básica del DOM implementadas. Pendiente dinamismo de tareas y motor del Dashboard. |
+| **HTML5** | 🟢 Completado | **100%** | Estructura semántica terminada. Incluye menú SPA, Dashboard con tarjetas de métricas/sobrecarga y formularios con tablas para Personal, Materiales, Otros Costos y Tareas. |
+| **JavaScript (ES6+)** | 🟡 En proceso | **50%** | Conectada la navegación por pestañas y los módulos CRUD en memoria para **Personal** y **Materiales**. Pendientes el módulo de **Otros Costos**, la asignación dinámica en **Tareas**, el motor del **Dashboard** y las reglas de **Integridad Referencial**. |
+| **CSS3** | 🔴 Inicial | **15%** | Declaradas únicamente las reglas básicas `.seccion` y `.seccion.active` para permitir la alternancia de pantallas. Pendiente diseño visual, transiciones y transformaciones. |
 
 ---
 
-## 🛠️ Requisitos Técnicos y Arquitectura
+## ⚙️ Especificaciones Técnicas
 
-* **Patrón de Arquitectura:** Single Page Application (SPA) en un solo archivo ejecutable en el navegador.
-* **Persistencia de Datos:** Estructuras de datos dinámicas en memoria RAM utilizando arreglos (`Array`) de JavaScript.
-* **Backend:** Ninguno (requisito académico del proyecto).
+* **Estructura de Datos:** Manejo de información en memoria RAM mediante arreglos dinámicos (`Array` de objetos en JavaScript).
+* **Navegación:** Manipulación de clases del DOM sin recarga de página.
+* **Integridad Referencial:** Control estricto para evitar el borrado de entidades asociadas a tareas.
 
 ---
 
-## 📌 Funcionalidades Principales
+## 📋 Estado de Módulos y Requerimientos
 
-- [x] **Navegación SPA:** Transición entre secciones sin recargar la página.
-- [x] **Gestión de Personal:** Registro de trabajadores y definición de costo por hora.
-- [x] **Gestión de Materiales:** Registro de insumos con unidades de medida y costo unitario.
-- [x] **Gestión de Otros Costos:** Registro de servicios o gastos adicionales.
-- [ ] **Asignación Múltiple en Tareas:** Creación dinámicas de filas para asociar personal, horas, materiales y otros costos.
-- [ ] **Integridad Referencial:** Bloqueo de eliminación para elementos que estén o hayan estado asignados a una tarea.
+- [x] **Navegación SPA:** Transición fluida entre secciones.
+- [x] **Registro de Personal:** Formulario y renderizado en tabla en memoria.
+- [x] **Registro de Materiales:** Formulario y renderizado en tabla en memoria.
+- [ ] **Registro de Otros Costos:** Formulario en HTML, pendiente conectar event listener en JS.
+- [ ] **Creación y Asignación de Tareas:**
+  - [ ] Generación dinámica de opciones (`<select>`) para Personal, Materiales y Otros Costos.
+  - [ ] Asignación de horas de trabajo y cantidades por insumo.
+  - [ ] Cambio de estado (Pendiente / Concluida).
+- [ ] **Validación de Integridad (Borrado):** Bloqueo de eliminación si el ID figura en `arregloTareas`.
 - [ ] **Dashboard Analítico:**
-  - Cálculo automático del avance (%) basado en tareas concluidas.
-  - Comparativa de costo Total, Personal, Materiales y Otros (Planificado vs. Real).
-  - Alerta de sobreutilización de personal (>8 horas de trabajo por día).
+  - [ ] Porcentaje de avance general ($\frac{\text{Concluidas}}{\text{Totales}} \times 100$).
+  - [ ] Cálculo de costos Planificados vs. Reales (Totales, Personal, Materiales, Otros).
+  - [ ] Algoritmo de detección de sobreutilización (>8 horas/día por trabajador en la misma fecha).
+- [ ] **Estilos y Animaciones (CSS3):**
+  - [ ] Layout adaptativo para tarjetas (`grid`/`flexbox`).
+  - [ ] Transiciones CSS en navegación (`transition: opacity`).
+  - [ ] Transformaciones CSS en tarjetas del Dashboard (`transform: translateY`).
 
 ---
 
-## 🚀 Próximos Pasos (Roadmap)
+## 🚀 Hoja de Ruta para Finalizar
 
-1. **JavaScript:** Completar el generador de filas dinámicas dentro del formulario de Tareas.
-2. **JavaScript:** Programar la función de cálculo financiero y detección de sobrecarga laboral en el Dashboard.
-3. **JavaScript:** Aplicar la validación de integridad referencial con `.some()` en la eliminación de datos.
-4. **CSS3:** Diseñar la interfaz con Grid/Flexbox, agregar animación a la barra de progreso y efectos `hover` con `transform: translateY()`.
+1. **JS:** Copiar la lógica de submit/render para el formulario de **Otros Costos**.
+2. **JS:** Implementar las funciones de agregar filas dinámicas (`agregarFilaPersonalTarea()`, etc.).
+3. **JS:** Procesar el submit de Tareas y vincular el cálculo matemáticos del Dashboard.
+4. **JS:** Agregar la restricción `.some()` en las funciones de borrado.
+5. **CSS:** Aplicar los estilos visuales, paleta de colores y animaciones requeridas.
 
 ---
 
 ## 👤 Autor
 
-* **Desarrollado para:** 3er Parcial de Programación / Ingeniería.
+* **Asignatura:** 3er Parcial de Programación / Ingeniería de Computación.
