@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Proyectos</title>
+  <style>
+      .seccion{
+        display: none;
+      }
+      .seccion.active{
+        display: block;
+      }
+  </style>
+</head>
+<body>
+  <h2>Gestor de Proyectos</h2>
+  <nav>
+    <button class="btn-nav active" data-target="dashboard">Dashboard</button>
+    <button class="btn-nav" data-target="personal">Personal</button>
+    <button class="btn-nav" data-target="materiales">Materiales</button>
+    <button class="btn-nav" data-target="otros">Otros Costos</button>
+    <button class="btn-nav" data-target="tareas">Tareas</button>
+  </nav>
+  <main>
+    <section id="seccion-dashboard" class = "seccion active">
+      <h1>Dashboard del Proyecto</h1>
+      <div class ="tarjeta-grid">
+        <div class ="tarjeta">
+            <h3>Avance del Proyecto</h3>
+            <p id="dash-avance">0%</p>
+        </div>
+        <div class ="tarjeta">
+          <h3>Costo Planificado vs Real</h3>
+          <p id="dash-costos">$0.00 / $0.00</p>
+        </div>
+      </div>
+      
+      <h2>Desglose de Costos (Planificado vs Real)</h2>
+      <div class="tarjeta-grid">
+        <div class="tarjeta">
+          <h3>Mano de Obra (Personal)</h3>
+          <p id="dash-pers-costo">$0.00 / $0.00</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Materiales</h3>
+          <p id="dash-mat-costo">$0.00 / $0.00</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Otros Gastos</h3>
+          <p id="dash-otros-costo">$0.00 / $0.00</p>
+        </div>
+      </div>
+
+      <h2>Alertas de Sobrecarga Laboral (>8h/día)</h2>
+      <div id="contenedor-sobrecarga">
+        <p>No hay alertas de sobrecarga registradas.</p>
+      </div>
+    </section>
+    <section id="seccion-personal" class ="seccion">
+      <h1>Gestión de Personal</h1>
+      <form id="form-personal">
+        <div>
+          <label for="pers-nombre">Nombre Completo:</label>
+          <input type="text" id="pers-nombre" placeholder="Ej: Javier Carmona" required>
+        </div>
+        <div>
+          <label for="pers-rol">Rol / Cargo: </label>
+          <input type="text" id="pers-rol" placeholder="Ej: Electricista" required>
+        </div>
+        <div>
+          <label for="pers-costo">Costo por Hora ($): </label>
+          <input type="number" id="pers-costo" step="0.01" min="0" placeholder="Ej: 15.50" required>
+        </div>
+        <button type="submit">Guardar Personal</button>
+      </form>
+
+      <h2>Tabla de Personal</h2>
+      <table border="1">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Rol</th>
+              <th>Costo/Hora</th>
+              <th>Acciones</th>  
+            </tr>
+          </thead>
+          <tbody id="tabla-personal-body">
+          </tbody>
+      </table>
+    </section>
+    
+     <section id="seccion-materiales" class ="seccion">
+      <h1>Gestión de Materiales</h1>
+      <form id="form-materiales">
+        <div>
+          <label for="mater-nombre">Nombre del Material:</label>
+          <input type="text" id="mater-nombre" placeholder="Ej: Ladrillo" required>
+        </div>
+        <div>
+          <label for="mater-unidad">Unidad de Medida: </label>
+          <input type="text" id="mater-unidad" placeholder="Ej: m, kg, unidad, etc" required>
+        </div>
+        <div>
+          <label for="mater-costo">Costo del Material ($): </label>
+          <input type="number" id="mater-costo" step="0.01" min="0" placeholder="Ej: 15.50" required>
+        </div>
+        <button type="submit">Guardar Material</button>
+      </form>
+
+      <h2>Tabla de Materiales</h2>
+      <table border="1">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Material</th>
+              <th>Unidad</th>
+              <th>Costo Unitario</th>
+              <th>Acciones</th>  
+            </tr>
+          </thead>
+          <tbody id="tabla-material-body">
+          </tbody>
+      </table>
+    </section>
+
+    <section id="seccion-otros" class = "seccion">
+      <h1>Otros Costos</h1>
+      <form id="form-otros">
+        <div>
+          <label for="otro-nombre">Descripción del Gasto:</label>
+          <input type="text" id="otro-nombre" placeholder="Ej: Proceso" required>
+        </div>
+        <div>
+          <label for="otro-costo">Costo por Unidad/Servicio($): </label>
+          <input type="number" id="otro-costo" step="0.01" min="0" placeholder="Ej: 15.50" required>
+        </div>
+        <button type="submit">Guardar Costo</button>
+      </form>
+
+      <h2>Tabla de Costos</h2>
+      <table border="1">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descripción</th>
+              <th>Costo Unitario</th>
+              <th>Acciones</th>  
+            </tr>
+          </thead>
+          <tbody id="tabla-otros-body">
+          </tbody>
+      </table>
+    </section>
+
+    <section id="seccion-tareas" class = "seccion">
+      <h1>Gestión de Tareas</h1>
+          <form id="form-tareas">
+        <!-- 1. DATOS BÁSICOS DE LA TAREA -->
+        <div>
+          <label for="tarea-nombre">Nombre de la Tarea:</label>
+          <input type="text" id="tarea-nombre" placeholder="Ej: Vaciado de Losas" required>
+        </div>
+
+        <div>
+          <label for="tarea-fecha">Fecha de Ejecución:</label>
+          <input type="date" id="tarea-fecha" required>
+        </div>
+
+        <br>
+
+        <!-- 2. ASIGNACIÓN DINÁMICA DE PERSONAL -->
+        <fieldset>
+          <legend><strong>Asignar Personal</strong></legend>
+          <div id="tarea-personal-contenedor">
+            <!-- Aquí se insertarán dinámicamente las filas de selección con JS -->
+          </div>
+          <button type="button" onclick="agregarFilaPersonalTarea()">+ Asignar Trabajador</button>
+        </fieldset>
+
+        <br>
+
+        <!-- 3. ASIGNACIÓN DINÁMICA DE MATERIALES -->
+        <fieldset>
+          <legend><strong>Asignar Materiales</strong></legend>
+          <div id="tarea-materiales-contenedor">
+            <!-- Aquí se insertarán dinámicamente los materiales con JS -->
+          </div>
+          <button type="button" onclick="agregarFilaMaterialTarea()">+ Asignar Material</button>
+        </fieldset>
+
+        <br>
+
+        <!-- 4. ASIGNACIÓN DINÁMICA DE OTROS COSTOS -->
+        <fieldset>
+          <legend><strong>Asignar Otros Costos</strong></legend>
+          <div id="tarea-otros-contenedor">
+            <!-- Aquí se insertarán dinámicamente los otros gastos con JS -->
+          </div>
+          <button type="button" onclick="agregarFilaOtroTarea()">+ Asignar Otro Gasto</button>
+        </fieldset>
+
+        <br>
+        <button type="submit">Crear Tarea</button>
+      </form>
+
+      <br><hr><br>
+
+      <!-- TABLA DE TAREAS REGISTRADAS -->
+      <h2>Lista de Tareas</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tarea</th>
+            <th>Fecha</th>
+            <th>Costo Estimado</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-tareas-body">
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script>
+    const botonesNav = document.querySelectorAll('.btn-nav')
+    const secciones = document.querySelectorAll('.seccion')
+
+    botonesNav.forEach(boton =>{
+      boton.addEventListener('click', () => {
+        secciones.forEach(sec => sec.classList.remove('active'));
+        botonesNav.forEach(btn => btn.classList.remove('active'));
+
+        const objetivo = boton.getAttribute('data-target');
+        document.getElementById(`seccion-${objetivo}`).classList.add('active');
+        boton.classList.add('active');
+      });
+    });
+    
+
+        // 1. Arreglo principal y contador ID para Personal
+    let arregloPersonal = [];
+    let idPersonalSeq = 1;
+
+    // 2. Referencias a elementos del DOM
+    const formPersonal = document.getElementById('form-personal');
+    const tablaPersonalBody = document.getElementById('tabla-personal-body');
+
+    // 3. Escuchar el envío del formulario
+    formPersonal.addEventListener('submit', (evento) => {
+      evento.preventDefault(); // Evita que la página se recargue
+
+      // Capturar valores ingresados
+      const nombre = document.getElementById('pers-nombre').value;
+      const rol = document.getElementById('pers-rol').value;
+      const costoHora = parseFloat(document.getElementById('pers-costo').value);
+
+      // Crear objeto y meterlo al arreglo
+      const nuevoPersonal = {
+        id: idPersonalSeq++,
+        nombre: nombre,
+        rol: rol,
+        costoHora: costoHora
+      };
+
+      arregloPersonal.push(nuevoPersonal);
+
+      // Limpiar inputs y refrescar la tabla
+      formPersonal.reset();
+      renderTablaPersonal();
+    });
+
+    // 4. Función para dibujar la tabla en pantalla a partir del arreglo
+    function renderTablaPersonal() {
+      tablaPersonalBody.innerHTML = ''; // Limpiar la tabla antes de re-dibujar
+
+      arregloPersonal.forEach(persona => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${persona.id}</td>
+          <td>${persona.nombre}</td>
+          <td>${persona.rol}</td>       <td>$${persona.costoHora.toFixed(2)}</td>
+          <td>
+            <button onclick="eliminarPersonal(${persona.id})">Eliminar</button>
+          </td>
+        `;
+        tablaPersonalBody.appendChild(fila);
+      });
+    }
+
+    // 5. Función borrador para eliminar personal (con validación de integridad)
+    function eliminarPersonal(id) {
+      // NOTA: Cuando tengamos el arreglo de tareas, aquí validaremos que no esté asignado.
+      arregloPersonal = arregloPersonal.filter(persona => persona.id !== id);
+      renderTablaPersonal();
+    }
+
+    let arregloMateriales = [];
+    let idMaterialSeq = 1;
+
+    // 2. Referencias a elementos del DOM
+    const formMateriales = document.getElementById('form-materiales');
+    const tablaMaterialesBody = document.getElementById('tabla-material-body');
+
+    // 3. Escuchar el envío del formulario
+    formMateriales.addEventListener('submit', (evento) => {
+      evento.preventDefault(); // Evita que la página se recargue
+
+      // Capturar valores ingresados
+      const nombre = document.getElementById('mater-nombre').value;
+      const unidad = document.getElementById('mater-unidad').value;
+      const precioUnitario = parseFloat(document.getElementById('mater-costo').value);
+
+      // Crear objeto y meterlo al arreglo
+      const nuevoMaterial = {
+        id: idMaterialSeq++,
+        nombre: nombre,
+        unidad: unidad,
+        precioUnitario: precioUnitario
+      };
+
+      arregloMateriales.push(nuevoMaterial);
+
+      // Limpiar inputs y refrescar la tabla
+      formMateriales.reset();
+      renderTablaMateriales();
+    });
+
+    // 4. Función para dibujar la tabla en pantalla a partir del arreglo
+    function renderTablaMateriales() {
+      tablaMaterialesBody.innerHTML = ''; // Limpiar la tabla antes de re-dibujar
+
+      arregloMateriales.forEach(material => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${material.id}</td>
+          <td>${material.nombre}</td>
+          <td>${material.unidad}</td>
+          <td>$${material.precioUnitario.toFixed(2)}</td>
+          <td>
+            <button onclick="eliminarMaterial(${material.id})">Eliminar</button>
+          </td>
+        `;
+        tablaMaterialesBody.appendChild(fila);
+      });
+    }
+
+    // 5. Función borrador para eliminar material (con validación de integridad)
+    function eliminarMaterial(id) {
+      // NOTA: Cuando tengamos el arreglo de tareas, aquí validaremos que no esté asignado.
+      arregloMateriales = arregloMateriales.filter(material => material.id !== id);
+      renderTablaMateriales();
+    }
+  </script>
+</body>
+</html>
