@@ -113,7 +113,7 @@
         </table>
       </div>
     </section>
-    
+
 
     <section id="seccion-materiales" class="seccion">
       <h1>Gestion de Materiales</h1>
@@ -150,6 +150,41 @@
             </tr>
           </thead>
           <tbody id="tabla-material-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    
+    <section id="seccion-otros" class="seccion">
+      <h1>Otros Costos</h1>
+      <div class="form-contenedor">
+        <form id="form-otros">
+          <div class="form-grid">
+            <div class="form-grupo">
+              <label for="otro-nombre">Descripcion del Gasto / Servicio:</label>
+              <input type="text" id="otro-nombre" placeholder="Ej: Alquiler de Grua, Transporte..." required>
+            </div>
+            <div class="form-grupo">
+              <label for="otro-costo">Costo por Unidad / Servicio ($)</label>
+              <input type="number" id="otro-costo" step="0.01" min="0.01" placeholder="Ej: 50.00" required>
+            </div>
+          </div>
+          <button type="submit" class="btn">Guardar Costo</button>
+        </form>
+      </div>
+
+      <h2>Tabla de Otros Costos</h2>
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descripcion</th>
+              <th>Costo Unitario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-otros-body"></tbody>
         </table>
       </div>
     </section>
