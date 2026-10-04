@@ -66,8 +66,9 @@ body {
 }
 
 .brand-header h2 {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 800;
+  white-space: nowrap;
   color: #ffffff;
   display: flex;
   align-items: center;
