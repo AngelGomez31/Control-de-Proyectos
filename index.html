@@ -188,4 +188,63 @@
         </table>
       </div>
     </section>
+
+
+    <section id="seccion-tareas" class="seccion">
+      <h1>Gestion de Tareas</h1>
+      <div class="form-contenedor">
+        <form id="form-tareas">
+          <div class="form-grid">
+            <div class="form-grupo">
+              <label for="tarea-nombre">Nombre de la Tarea</label>
+              <input type="text" id="tarea-nombre" placeholder="Ej: Vaciado de Losas" required>
+            </div>
+            <div class="form-grupo">
+              <label for="tarea-fecha">Fecha de Ejecucion</label>
+              <input type="date" id="tarea-fecha" required>
+            </div>
+          </div>
+          <fieldset>
+            <legend>Asignar Personal y Tiempo de Ejecucion</legend>
+            <div id="tarea-personal-contenedor" class="filas-contenedor"></div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaPersonalTarea()"> + Asignar Trabajador              
+            </button>
+          </fieldset>
+          <fieldset>
+            <legend>Asignar Materiales y Cantidad</legend>
+            <div id="tarea-materiales-contenedor" class="filas-contenedor"></div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaMaterialTarea()">+ Asignar Material</button>
+          </fieldset>
+          <fieldset>
+            <legend>Asignar Otros Costos y Cantidad</legend>
+            <div id="tarea-otros-contenedor" class="filas-contenedor"></div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaOtroTarea">+ Asignar Otro Gasto</button>
+          </fieldset>
+          
+          <button type="submit" class="btn btn-succes" style="width: 100%; margin-top: 1rem; font-size: 1rem;">Crear y Registrar Tarea</button>
+        </form>
+      </div>
+
+      <h2>Lista de Tareas Registradas</h2>
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th> 
+              <th>Tarea</th> 
+              <th>Fecha</th> 
+              <th>Costo Estimado</th> 
+              <th>Estado</th> 
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-tareas-body"></tbody>
+        </table>
+      </div>
+    </section>
   </main>
+
+  <div id="toast-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>
