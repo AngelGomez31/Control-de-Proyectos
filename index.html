@@ -31,7 +31,7 @@
     </nav>  
   </aside>
 
-  
+
   <main>
     <section id="seccion-dashboard" class="seccion active">
       <h1>Dashboard del Proyecto</h1>
@@ -110,6 +110,46 @@
             </tr>
           </thead>
           <tbody id="tabla-personal-body"></tbody>
+        </table>
+      </div>
+    </section>
+    
+
+    <section id="seccion-materiales" class="seccion">
+      <h1>Gestion de Materiales</h1>
+      <div class="form-contenedor">
+        <form id="form-materiales">
+          <div class="form-grid">
+            <div class="form-grupo">
+              <label for="mater-nombre">Nombre del Material</label>
+              <input type="text" id="mater-nombre" placeholder="Ej: Ladrillo, Cemento, Pintura..." required>
+            </div>
+            <div class="form-grupo">
+              <label for="mater-unidad">Unidad de Medida</label>
+              <input type="text" id="mater-unidad" placeholder="Ej: m, kg, saco, unidad, etc" required>
+            </div>
+            <div class="form-grupo">
+              <label for="mater-costo">Costo Unitario del Material ($)</label>
+              <input type="number" id="mater-costo" step="0.01" min="0.01" placeholder="Ej: 12.50"required>
+            </div>
+          </div>
+          <button type="submit" class="btn">Guardar Material</button>
+        </form>
+      </div>
+
+      <h2>Materiales Registrados</h2>
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Material</th>
+              <th>Unidad</th>
+              <th>Costo Unitario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-material-body"></tbody>
         </table>
       </div>
     </section>
