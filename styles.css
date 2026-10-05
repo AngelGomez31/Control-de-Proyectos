@@ -260,6 +260,14 @@ h2 {
   justify-content: space-between;
 }
 
+#dash-mat-costo, 
+#dash-pers-costo, 
+#dash-otros-costo, 
+#dash-costos {
+    white-space: nowrap;
+    font-size: 1.5rem; 
+}
+
 /* Efecto hover interactivo: se levanta y se agranda suavemente */
 .tarjeta:hover {
   transform: translateY(-8px) scale(1.015);
