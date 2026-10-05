@@ -362,13 +362,13 @@ function crearTarea() {
             mostrarToast('Por favor ingrese una cantidad de material valida (> 0).', 'error'); 
             return; 
         } 
-        materialesAsignados.push({ idMaterial, cantidad});
+        materialesAsignados.push({ idMaterial, cantidad });
     }
 
     const otrosAsignados = [];
     const filasOtros = document.querySelectorAll('#tarea-otros-contenedor .fila-dinamica');
     for (let fila of filasOtros){
-        const idOtro = parseInt(fila.querySelector('.t-otro-cant').value);
+        const idOtro = parseInt(fila.querySelector('.t-otro-select').value);
         const cantidad = parseFloat(fila.querySelector('.t-otro-cant').value);
         if (isNaN(cantidad) || cantidad <= 0) { 
             mostrarToast('Por favor ingrese una cantidad de servicio o gasto valida', 'error');

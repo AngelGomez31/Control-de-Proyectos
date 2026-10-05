@@ -439,6 +439,9 @@ input, select {
   transition: all 0.25s ease;
   width: 100%;
 }
+input[type="date"] {
+    color-scheme: dark;
+}
 
 input:focus, select:focus {
   border-color: var(--accent);
