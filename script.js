@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarDashboard();
 });
 
+document.addEventListener('input', function (e) {
+    if (e.target.classList.contains('solo-letras')) {
+        e.target.value = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+    }
+});
+
 function inicializarNavegacion(){
     const botonesNav = document.querySelectorAll('.btn-nav');
     botonesNav.forEach(boton => {
