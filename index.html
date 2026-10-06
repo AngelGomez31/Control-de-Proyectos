@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,7 +82,7 @@
 
     </section>
     <section id ="seccion-personal" class="seccion">
-      <h1>Gestion de Personal</h1>
+      <h1>Gestión de Personal</h1>
       <div class="form-contenedor">
         <form id="form-personal">
           <div class="form-grid">
@@ -121,7 +121,7 @@
 
 
     <section id="seccion-materiales" class="seccion">
-      <h1>Gestion de Materiales</h1>
+      <h1>Gestión de Materiales</h1>
       <div class="form-contenedor">
         <form id="form-materiales">
           <div class="form-grid">
@@ -166,7 +166,7 @@
         <form id="form-otros">
           <div class="form-grid">
             <div class="form-grupo">
-              <label for="otro-nombre">Descripcion del Gasto / Servicio:</label>
+              <label for="otro-nombre">Descripción del Gasto / Servicio:</label>
               <input type="text" id="otro-nombre" class="solo-letras" placeholder="Ej: Alquiler de Grua, Transporte..." required>
             </div>
             <div class="form-grupo">
@@ -184,7 +184,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Descripcion</th>
+              <th>Descripción</th>
               <th>Costo Unitario</th>
               <th>Acciones</th>
             </tr>
@@ -196,7 +196,7 @@
 
 
     <section id="seccion-tareas" class="seccion">
-      <h1>Gestion de Tareas</h1>
+      <h1>Gestión de Tareas</h1>
       <div class="form-contenedor">
         <form id="form-tareas">
           <div class="form-grid">
@@ -205,12 +205,12 @@
               <input type="text" id="tarea-nombre" class="solo-letras" placeholder="Ej: Vaciado de Losas" required>
             </div>
             <div class="form-grupo">
-              <label for="tarea-fecha">Fecha de Ejecucion</label>
+              <label for="tarea-fecha">Fecha de Ejecución</label>
               <input type="date" id="tarea-fecha" required>
             </div>
           </div>
           <fieldset>
-            <legend>Asignar Personal y Tiempo de Ejecucion</legend>
+            <legend>Asignar Personal y Tiempo de Ejecución</legend>
             <div id="tarea-personal-contenedor" class="filas-contenedor"></div>
             <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaPersonalTarea()"> + Asignar Trabajador              
             </button>

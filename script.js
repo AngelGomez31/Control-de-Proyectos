@@ -225,7 +225,7 @@ function eliminarMaterial(id){
     arregloMateriales = arregloMateriales.filter(m => m.id !== id);
     renderTablaMateriales();
     actualizarDashboard();
-    mostrarToast();
+    mostrarToast(`Material "${mat.nombre}" eliminado.`, 'success');
 }
 
 function renderTablaOtros(){
@@ -262,6 +262,7 @@ function eliminarOtro(id){
 
     if(asignado){
         mostrarToast(`No se puede eliminar "${otro.nombre}" porque esta o estuvo asignado a una o mas tareas.`, 'error');
+        return;
     }
 
     arregloOtrosCostos = arregloOtrosCostos.filter(o => o.id !== id);
@@ -300,7 +301,7 @@ function agregarFilaMaterialTarea(){
     const div = document.createElement('div');
     div.className = 'fila-dinamica';
 
-    div.innerHTML =   div.innerHTML = `
+    div.innerHTML = `
     <select class="t-mat-select" required>
       ${arregloMateriales.map(m => `<option value="${m.id}">${m.nombre} ($${m.precioUnitario.toFixed(2)} / ${m.unidad})</option>`).join('')}
     </select>
@@ -351,7 +352,7 @@ function crearTarea() {
     const filasPers = document.querySelectorAll('#tarea-personal-contenedor .fila-dinamica');
     for (let fila of filasPers){
         const idPersonal = parseInt(fila.querySelector('.t-pers-select').value);
-        const horas = parseInt(fila.querySelector('.t-pers-horas').value);
+        const horas = parseFloat(fila.querySelector('.t-pers-horas').value);
         if (isNaN(horas) || horas <= 0){
             mostrarToast('Por favor asigne horas de trabajo validas','error');
             return;
@@ -445,7 +446,7 @@ function eliminarTarea(id){
     const tarea = arregloTareas.find(t => t.id === id);
     if (!tarea) return;
 
-    const tieneAsignaciones = tarea.personalAsignado.length > 0 || tarea.materialesAsignados.length > 0 || tarea.otrosAsignados > 0 || tarea.concluida;
+    const tieneAsignaciones = tarea.personalAsignado.length > 0 || tarea.materialesAsignados.length > 0 || tarea.otrosAsignados.length > 0 || tarea.concluida;
 
     if (tieneAsignaciones){
         mostrarToast('No se puede eliminar esta tarea: tiene elementos asignados o ya fue concluida (regla de integridad)', 'error');
