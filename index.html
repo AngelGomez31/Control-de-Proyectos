@@ -210,18 +210,18 @@
             </div>
           </div>
           <fieldset>
-            <legend>Asignar Personal y Tiempo de Ejecución</legend>
+            <legend>Asignar Personal y Tiempo de Ejecución (Obligatorio)</legend>
             <div id="tarea-personal-contenedor" class="filas-contenedor"></div>
             <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaPersonalTarea()"> + Asignar Trabajador              
             </button>
           </fieldset>
           <fieldset>
-            <legend>Asignar Materiales y Cantidad</legend>
+            <legend>Asignar Materiales y Cantidad (Obligatorio)</legend>
             <div id="tarea-materiales-contenedor" class="filas-contenedor"></div>
             <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaMaterialTarea()">+ Asignar Material</button>
           </fieldset>
           <fieldset>
-            <legend>Asignar Otros Costos y Cantidad</legend>
+            <legend>Asignar Otros Costos y Cantidad (Opcional)</legend>
             <div id="tarea-otros-contenedor" class="filas-contenedor"></div>
             <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaOtroTarea()">+ Asignar Otro Gasto</button>
           </fieldset>
@@ -248,6 +248,49 @@
       </div>
     </section>
   </main>
+
+  <!-- Modal de Edición de Tarea (Solo disponible para tareas Pendientes) -->
+  <div id="modal-editar-tarea" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color:#ffffff;">Editar Tarea</h3>
+        <button type="button" class="modal-close" onclick="cerrarModalEditarTarea()">&times;</button>
+      </div>
+      <form id="form-editar-tarea">
+        <input type="hidden" id="edit-tarea-id">
+        <div class="form-grid">
+          <div class="form-grupo">
+            <label for="edit-tarea-nombre">Nombre de la Tarea:</label>
+            <input type="text" id="edit-tarea-nombre" class="solo-letras" placeholder="Ej: Vaciado de Losas" required>
+          </div>
+          <div class="form-grupo">
+            <label for="edit-tarea-fecha">Fecha de Ejecución:</label>
+            <input type="date" id="edit-tarea-fecha" required>
+          </div>
+        </div>
+        <fieldset>
+          <legend>Personal Asignado (Obligatorio)</legend>
+          <div id="edit-tarea-personal-contenedor" class="filas-contenedor"></div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaPersonalEdit()">+ Asignar Trabajador</button>
+        </fieldset>
+        <fieldset>
+          <legend>Materiales Asignados (Obligatorio)</legend>
+          <div id="edit-tarea-materiales-contenedor" class="filas-contenedor"></div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaMaterialEdit()">+ Asignar Material</button>
+        </fieldset>
+        <fieldset>
+          <legend>Otros Costos (Opcional)</legend>
+          <div id="edit-tarea-otros-contenedor" class="filas-contenedor"></div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="agregarFilaOtroEdit()">+ Asignar Otro Gasto</button>
+        </fieldset>
+        
+        <div style="display:flex; gap:0.8rem; justify-content:flex-end; margin-top:1.2rem;">
+          <button type="button" class="btn btn-secondary" onclick="cerrarModalEditarTarea()">Cancelar</button>
+          <button type="submit" class="btn btn-success">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <div id="toast-container"></div>
   <script src="script.js"></script>
